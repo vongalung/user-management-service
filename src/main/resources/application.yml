@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: user-management-service
+  jpa:
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        default_schema: user_management
+        format_sql: ${SHOW_SQL_QUERIES:false}
+    show-sql: ${SHOW_SQL_QUERIES:false}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}?autoReconnect=true;
+    username: ${DB_UNAME}
+    password: ${DB_PASS}
+  sql:
+    init:
+      platform: postgresql
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_HOST}/realms/${KEYCLOAK_DEFAULT_REALM_NAME}
+  kafka:
+    producer:
+      bootstrap-servers: ${KAFKA_HOST}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([requestId=%X{requestId} userId=%X{userId}]) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"

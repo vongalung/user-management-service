@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+    #        format_sql: true
+    #    show-sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}?autoReconnect=true;
+    username: ${DB_UNAME:postgres}
+    password: ${DB_PASS:1234}
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 30
+  sql:
+    init:
+      mode: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_HOST:http://localhost:9090}/realms/${KEYCLOAK_DEFAULT_REALM_NAME:playground}
+  kafka:
+    producer:
+      bootstrap-servers: ${KAFKA_HOST:localhost:29092}
