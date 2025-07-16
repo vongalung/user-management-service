@@ -28,3 +28,18 @@ spring:
 logging:
   pattern:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([requestId=%X{requestId} userId=%X{userId}]) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+app:
+  keycloak:
+    host: ${KEYCLOAK_HOST}
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    client-secret: ${KEYCLOAK_CLIENT_SECRET}
+    default-realm: ${KEYCLOAK_DEFAULT_REALM_NAME}
+    default-user-role: ${KEYCLOAK_DEFAULT_USER_ROLE:role_general}
+    default-admin:
+      username: ${KEYCLOAK_DEFAULT_ADMIN_USERNAME}
+      password: ${KEYCLOAK_DEFAULT_ADMIN_PASSWORD}
+    admin-user-roles: []
+  user-management:
+    default-scope-group: ${USER_DEFAULT_SCOPE_GROUP}
+    broadcast-topic:
+      user-wipe: ${TOPIC_USER_WIPE:user-wipe}
